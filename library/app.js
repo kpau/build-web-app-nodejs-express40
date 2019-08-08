@@ -16,8 +16,34 @@ app.use('/css', express.static(path.join(__dirname, 'node_modules/bootstrap/dist
 app.use('/js', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js')));
 app.use('/js', express.static(path.join(__dirname, 'node_modules/jquery/dist')));
 
+app.set('views', './src/views');
+
+app.set('view engine', 'pug');
+app.set('view engine', 'ejs');
+
 app.get('/', (req, res) => {
+  res.render('index', {
+    title: 'My Library',
+    list: ['a', 'b'],
+  });
+});
+
+app.get('/html', (req, res) => {
   res.sendFile(path.join(__dirname, 'views/index.html'));
+});
+
+app.get('/pug', (req, res) => {
+  res.render('template.pug', {
+    title: 'My Library',
+    list: ['a', 'b'],
+  });
+});
+
+app.get('/ejs', (req, res) => {
+  res.render('template.ejs', {
+    title: 'My Library',
+    list: ['a', 'b'],
+  });
 });
 
 app.listen(port, () => {
