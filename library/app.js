@@ -4,10 +4,16 @@ const debug = require('debug')('app');
 const morganDebug = require('morgan-debug');
 const path = require('path');
 
-const port = process.env.PORT || 3000;
-
 const app = express();
+const port = process.env.PORT || 3000;
+const nav = [
+  { link: '/books', title: 'Books' },
+  { link: '/authors', title: 'Authors' },
+];
 
+const bookRouter = require('./src/routes/bookRoutes')(nav);
+
+app.use('/books', bookRouter);
 app.use(morganDebug('http', 'tiny'));
 app.use(express.static(path.join(__dirname, 'public/')));
 
@@ -17,14 +23,13 @@ app.use('/js', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/
 app.use('/js', express.static(path.join(__dirname, 'node_modules/jquery/dist')));
 
 app.set('views', './src/views');
-
 app.set('view engine', 'pug');
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
   res.render('index', {
     title: 'My Library',
-    list: ['a', 'b'],
+    nav,
   });
 });
 
