@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "@powershell $env:DEBUG='app,http' ; nodemon app.js",
+    "start": "@powershell $env:DEBUG='app,app:*,http' ; nodemon app.js",
     "lint": "eslint app.js",
     "lint:fix": "eslint app.js --fix"
   },
@@ -17,6 +17,7 @@
     "ejs": "^2.6.2",
     "express": "^4.17.1",
     "jquery": "^3.4.1",
+    "mongodb": "^3.3.0-beta2",
     "morgan": "^1.9.1",
     "morgan-debug": "^2.0.0",
     "pug": "^2.0.4"

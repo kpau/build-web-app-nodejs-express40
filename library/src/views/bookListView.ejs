@@ -90,8 +90,7 @@
 
 
           <!--/stories-->
-          <% for (let i = 0; i < books.length; i++) { %>
-            <% let book = books[i] %>
+          <% for (let book of books) { %>
             <div class="row">
               <br>
               <div class="col-md-2 col-sm-3 text-center">
@@ -103,7 +102,7 @@
                   <div class="col-xs-9">
                     <h4><span class="label label-default"><%=book.author%></span></h4><h4>
                     <small style="font-family:courier,'new courier';" class="text-muted">2 hours ago  •
-                      <a href="/books/<%=i%>" class="text-muted">Read More</a>
+                      <a href="/books/<%=book._id%>" class="text-muted">Read More</a>
                     </small>
                     </h4></div>
                   <div class="col-xs-3"></div>
