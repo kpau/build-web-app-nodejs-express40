@@ -3,14 +3,29 @@ const chalk = require('chalk');
 const debug = require('debug')('app');
 const morganDebug = require('morgan-debug');
 const path = require('path');
+const sql = require('mssql');
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+const sqlConfig = {
+  user: '...',
+  password: '...',
+  server: 'localhost\\sqlexpress',
+  database: 'library',
+
+  options: {
+    encrypt: true, // Use this if you're on Windows Azure
+  },
+};
+
+sql.connect(sqlConfig)
+  .catch(err => debug(err));
+
 const nav = [
   { link: '/books', title: 'Books' },
   { link: '/authors', title: 'Authors' },
 ];
-
 const bookRouter = require('./src/routes/bookRoutes')(nav);
 
 app.use('/books', bookRouter);
