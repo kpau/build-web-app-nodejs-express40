@@ -5,6 +5,14 @@ const debug = require('debug')('app:bookRoutes');
 function router(nav) {
   const bookRouter = express.Router();
 
+  bookRouter.use((req, res, next) => {
+    if (req.user) {
+      next();
+    } else {
+      res.redirect('/');
+    }
+  });
+
   const books = [
     {
       _id: 1,
